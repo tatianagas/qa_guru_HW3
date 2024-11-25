@@ -1,16 +1,11 @@
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class practiceFormTest {
+public class PracticeFormTest {
 
     @BeforeAll
     static void beforeAll() {
@@ -22,6 +17,8 @@ public class practiceFormTest {
     @Test
     void fillTotalFormTest() {
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Ivan");
         $("#lastName").setValue("Petrov");
         $("#userEmail").setValue("ivan_petrov1978@mail.ru");
@@ -36,7 +33,7 @@ public class practiceFormTest {
         $("#subjectsInput").setValue("Biology").pressEnter();
         $("#hobbiesWrapper").$(byText("Reading")).click();
 
-        $("#uploadPicture").uploadFile(new File("src/data/bug.jpg"));
+        $("#uploadPicture").uploadFromClasspath("bug.jpg");
         $("#currentAddress").setValue("Some address");
         $("#submit").scrollIntoView(false);
         $("#state").click();
